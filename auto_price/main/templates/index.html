@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>Car Base Django Project</title>
+    </head>
+    <body>
+        <h2 style="text-align: center;">Welcome to the Car Base Django Project</h2>
+        <h4 style="text-align: center;">Please, select the car you are looking for and press "Confirm"</h4>
+        <div>
+            <form method="post" action='/details/' style='text-align: center;'>
+                <table style='margin-left: auto; margin-right: auto; text-align: left;'>
+                {% csrf_token %}
+                {{ form }}
+                </table>
+                <input type='submit' value='Confirm' style="width: 20%">
+                </form>
+        </div>
+    </body>
+</html>
+
+

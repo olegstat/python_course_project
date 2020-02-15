@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>{{ selected_make }} {{ selected_model }} - Details</title>
+    </head>
+    <body>
+        {% if total_ad_num == 0 %}
+            <p style="font-weight: bold;">There are no ads according to your search parameters. Please check your choice or change them.</p>
+        {% elif total_ad_num > 0 %}
+            <div style='width: 100%; height: 100%; top: 0; left: 0; overflow: auto;'>
+                <div style='width: 350px; top: 0; right: 0; bottom: 0; left: 0; margin: auto;'>
+                <button onclick="window.location.href = '/'" style="width: 300px;">Go Back</button>
+                <p><span style="font-weight: bold;"> Selected car:</span> {{ selected_make }} {{ selected_model }} {{ selected_year_from }} - {{ selected_year_until }}</p>
+                <p><span style="font-weight: bold;">Total number of active ads:</span> {{total_ad_num }}</p>
+                <p><span style="font-weight: bold;">Average market price:</span> {{ avg_price }} EUR</p>
+                <p><span style="font-weight: bold;">Min price:</span> {{ min_price }} EUR. <a href='{{ min_ad_url }}' target="_blank">Open it on 999.md</a></p>
+                <p><span style="font-weight: bold;">Max price:</span> {{ max_price }} EUR. <a href="{{ max_ad_url }}" target="_blank">Open it on 999.md</a></p>
+                <hr>
+                </div>
+            <p style="font-weight: bold; margin-left: 39%;">Top 5 {{ selected_make }} {{ selected_model }} ads with the best price</p>
+            <div style="margin-left: 31%;">{{ top_5 | safe }}</div>
+        </div>
+        {% endif %}
+    </body>
+</html>
