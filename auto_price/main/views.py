@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, FileResponse
 from .forms import CarInputForm
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -11,6 +11,11 @@ from django_pandas.io import read_frame
 from django.utils.html import escape
 from django.urls import reverse
 import pandas as pd
+import matplotlib.pyplot as plt
+from io import BytesIO
+import base64
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
 
 #main page view with form
 def main_page_view(request):
@@ -46,8 +51,9 @@ def details_view(request):
             }).filter(['Price', 'Year', 'Engine', 'Gearbox', 'Link', 'Date added']).to_html(render_links=True, escape=False, index=False)
         df_plot = read_frame(qs)
         df_plot = df_plot[(df_plot.make == selected_make)]
-        plot = pd.crosstab(df_plot['model'], df_plot['make'], margins=False, normalize=False)
-        print(plot)
+        plot = pd.crosstab(df_plot['model'], df_plot['make'], margins=False, normalize=False).sort_values(by='{}'.format(selected_make))
+        barh = plot.plot(kind='barh', title=f'Popularity of all {selected_make} models (in number of ads)')
+        barh.get_figure().savefig('plot1.png')
         return render(request, 'detail.html', {
             'avg_price': avg_price, 
             'selected_make': selected_make, 
@@ -59,10 +65,29 @@ def details_view(request):
             'min_ad_url': min_ad_url, 
             'max_ad_url': max_ad_url,
             'total_ad_num': total_ad_num,
-            'top_5': top_5
+            'top_5': top_5,
             })
     else:
         return render(request, 'no_ads.html')
+
+#plot view
+def plot_view(request):
+    with open('plot1.png', "rb") as f:
+        return HttpResponse(f.read(), content_type="image/jpeg")
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('/')
+    else:
+        form = UserCreationForm()
+    return render(request, 'signup.html', {'form': form})
 
 #api view
 class CarBaseListView(APIView):
