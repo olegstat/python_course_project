@@ -88,7 +88,6 @@ def signup_view(request):
 
 #api view
 class CarBaseListView(APIView):
-    permission_classes = (AllowGetMethod,)
     def get(self, request, format=None):
         cars = CarBase.objects.all()[:50]
         serializer = CarBaseSerializer(cars, many=True)
