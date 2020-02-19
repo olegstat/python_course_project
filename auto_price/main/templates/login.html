@@ -3,16 +3,25 @@
   <head>
     <meta charset="utf-8">
     <title>Login</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
   </head>
-  <body>
+  <body style="background-image:
+  url('https://colormunk.com/wp-content/uploads/2016/05/Minimalist-bus-vector-road-art-hd-wallpaper.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover; font-family: 'Open Sans', sans-serif; color: whitesmoke;">
     {% block content %}
-    <h2>Login</h2>
-    <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Login</button>
-    </form>
+    {% csrf_token %}
+    <div style="margin-left: 40%; margin-top: 10%;">
+      <h2>Login</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+      </form>
+      <p>New User? Please, <a href="/signup/">Sign Up</a></p>
+    </div>
     {% endblock %}
-    <p>New User? Please, <a href="/signup/">Sign Up</a></p>
+    
   </body>
 </html>

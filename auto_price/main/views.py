@@ -71,6 +71,16 @@ def plot_view(request):
     with open('plot1.png', "rb") as f:
         return HttpResponse(f.read(), content_type="image/jpeg")
 
+#top 20 auto plot view
+def all_auto_plot_view(request):
+    qs = CarBase.objects.all()
+    df = read_frame(qs)
+    top_20 = df['make'].value_counts()[:20]
+    barh = top_20.plot(kind='bar', title='Top 20 car brands in Moldova (by number of ads)')
+    barh.get_figure().savefig('plot_top.png')
+    with open('plot_top.png', 'rb') as t:
+        return HttpResponse(t.read(), content_type='image/jpeg')
+
 #sign up view
 def signup_view(request):
     if request.method == 'POST':

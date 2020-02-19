@@ -3,26 +3,34 @@
     <head>
         <meta charset="utf-8">
         <title>Car Base Django Project</title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     </head>
-    <body>
+    <body style="background-image:
+        url('https://colormunk.com/wp-content/uploads/2016/05/Minimalist-bus-vector-road-art-hd-wallpaper.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover; font-family: 'Open Sans', sans-serif; color: whitesmoke;">
         {% block content %}
             {% if user.is_authenticated %}
-                You are logged in as: <span style="font-weight: bold;">{{ user.username }}</span> <p><a href="{% url 'logout' %}">logout</a></p>
+                You are logged in as: {{ user.username }}<p><a href="{% url 'logout' %}">logout</a></p>
             {% else %}
                 <p>You are not logged in</p>
                 <a href="{% url 'login' %}">login</a>
             {% endif %}
         {% endblock %}
-        <h2 style="text-align: center;">Welcome to the Car Base Django Project</h2>
-        <h4 style="text-align: center;">Please, select the car you are looking for and press "Confirm"</h4>
+        <h2 style="text-align: center; font-weight: lighter;">Welcome to the Car Base Django Project</h2>
+        <h4 style="text-align: center; font-weight: lighter;">Please, select the car you are looking for and press "Confirm"</h4>
         <div>
-            <form method="post" action='/details/' style='text-align: center;'>
-                <table style='margin-left: auto; margin-right: auto; text-align: left;'>
+            <form method="post" action='/details/' style='text-align: center; font-weight: lighter;'>
+                <table style='margin-left: auto; margin-right: auto; text-align: left; font-weight: lighter;'>
                     {% csrf_token %}
                     {{ form }}
                 </table>
                 <input type='submit' value='Confirm' style="width: 20%">
+                <br>
+                <a href='/top_20/' target="_blank">Show top 20 car brands in Moldova</a>
             </form>
+           
         </div>
     </body>
 </html>

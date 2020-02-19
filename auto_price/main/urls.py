@@ -12,6 +12,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('details/', views.details_view),
     path('plot/', views.plot_view),
+    path('top_20/', views.all_auto_plot_view),
     path('api/', views.CarBaseListView.as_view(), name='car-base-api')
 ]
 
