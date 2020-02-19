@@ -6,14 +6,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import CarBaseSerializer
 from .models import CarBase
-from .permissions import AllowGetMethod
 from django_pandas.io import read_frame
 from django.utils.html import escape
 from django.urls import reverse
 import pandas as pd
-import matplotlib.pyplot as plt
-from io import BytesIO
-import base64
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 
@@ -75,6 +71,7 @@ def plot_view(request):
     with open('plot1.png', "rb") as f:
         return HttpResponse(f.read(), content_type="image/jpeg")
 
+#sign up view
 def signup_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
