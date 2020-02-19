@@ -1,30 +1,28 @@
 <!doctype html>
 <html>
     <head>
-    <meta charset="utf-8">
-    <title>Car Base Django Project</title>
+        <meta charset="utf-8">
+        <title>Car Base Django Project</title>
     </head>
     <body>
-    {% block content %}
-    {% if user.is_authenticated %}
-    You are logged in as: <span style="font-weight: bold;">{{ user.username }}</span> <p><a href="{% url 'logout' %}">logout</a></p>
-    {% else %}
-    <p>You are not logged in</p>
-    <a href="{% url 'login' %}">login</a>
-    {% endif %}
-    {% endblock %}
+        {% block content %}
+            {% if user.is_authenticated %}
+                You are logged in as: <span style="font-weight: bold;">{{ user.username }}</span> <p><a href="{% url 'logout' %}">logout</a></p>
+            {% else %}
+                <p>You are not logged in</p>
+                <a href="{% url 'login' %}">login</a>
+            {% endif %}
+        {% endblock %}
         <h2 style="text-align: center;">Welcome to the Car Base Django Project</h2>
         <h4 style="text-align: center;">Please, select the car you are looking for and press "Confirm"</h4>
         <div>
             <form method="post" action='/details/' style='text-align: center;'>
                 <table style='margin-left: auto; margin-right: auto; text-align: left;'>
-                {% csrf_token %}
-                {{ form }}
+                    {% csrf_token %}
+                    {{ form }}
                 </table>
                 <input type='submit' value='Confirm' style="width: 20%">
-                </form>
+            </form>
         </div>
     </body>
 </html>
-
-
