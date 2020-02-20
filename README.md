@@ -9,3 +9,4 @@ This project uses:
 - Scrapy (web crawling framework)
 - Pandas (data analysis framework)
 - Matplotlib/Plotly (data vizualization)
+- SQLite3
