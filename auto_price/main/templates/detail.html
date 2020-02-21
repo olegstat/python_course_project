@@ -25,7 +25,7 @@
                         <hr>
                     </div>
                     <p style="margin-left: 39%;">Top 5 {{ selected_make }} {{ selected_model }} ads with best price</p>
-                    <div style="margin-left: 31%; font-weight: lighter;">{{ top_5 | safe }}</div>
+                    <div style="margin-left: 31%; font-weight: lighter; border: 1px solid black; border-collapse: collapse; padding: 15px">{{ top_5 | safe }}</div>
                     <br>
                     <a href="/plot/" target="_blank" style='margin-left: 38%;'>Show popularity of all {{ selected_make }} models on a bar plot</a>
                 </div>
