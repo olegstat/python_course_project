@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Car Base Django Project</title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    </head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        body {
+            background-image: url('https://colormunk.com/wp-content/uploads/2016/05/Minimalist-bus-vector-road-art-hd-wallpaper.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover; 
+            font-family: 'Open Sans', sans-serif; 
+            color: whitesmoke;
+            overflow: hidden;
+        }
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .nav__inner {
+            color: black;
+            text-align: right;
+            padding-right: 5px;
+        }
+        .wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            margin-top: 10%;
+            padding: 5px;
+            align-items: center;
+        }
+
+        h2, h4, form {
+            text-align: center;
+            font-weight: lighter;
+        }
+        table {
+            text-align: justify; 
+            font-weight: lighter;
+        }
+        input {
+            width: 100%;
+        }
+    </style>
+    
+    <body>
+        <div class='navbar'>
+            <div class='nav__inner'>
+                {% if user.is_authenticated %}
+                    <p>You are logged in as: {{ user.username }}<p>
+                    <a href="{% url 'logout' %}">logout</a>
+                {% else %}
+                    <p>You are not logged in</p>
+                    <a href="{% url 'login' %}">login</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class='wrapper'>
+            <div class='wrapper__name'>
+                <h2>Welcome to the Car Base Django Project</h2>
+                <h4>Please, select the car you are looking for and press "Confirm"</h4>
+            </div>
+            <div class='wrapper__form'>
+                <form method="post" action='/details/'>
+                    <table>
+                        {% csrf_token %}
+                        {{ form }}
+                    </table>
+                    <input type='submit' value='Confirm'>
+                    <br>
+                    <a href='/top_20/' target="_blank">Show top 20 car brands in Moldova</a>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

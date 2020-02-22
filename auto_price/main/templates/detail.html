@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ selected_make }} {{ selected_model }} - Details</title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    </head>
+    </head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        body {
+            background-image: url('https://colormunk.com/wp-content/uploads/2016/05/Minimalist-bus-vector-road-art-hd-wallpaper.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover; 
+            font-family: 'Open Sans', sans-serif; 
+            color: whitesmoke;
+            margin: 0;
+            overflow: hidden;
+        }
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .nav__inner {
+            color: black;
+            text-align: right;
+            padding-right: 5px;
+        }
+        .wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            margin-top: 5%;
+            margin-bottom: 5px;
+            padding: 5px;
+            align-items: center;
+        }
+
+        h2, h4, form {
+            text-align: center;
+            font-weight: lighter;
+        }
+        table { 
+            text-align: center; 
+            font-weight: 400;
+            border-collapse: collapse;
+            border: 1px solid darkgrey;
+        }
+        .table p {
+            text-align: center;
+            margin: 10px auto;
+        }
+        .details button {
+            width: 300px;
+            margin-top: 10px;
+        }
+        .selected {
+            margin-bottom: 10px;
+            font-weight: 550;
+        }
+        .popularity {
+            margin-top: 10px;
+        }
+        .nologin {
+            text-align: center;
+            margin-top: 20%;
+        }
+        th, tr, td {
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
+    
+    <body>
+        {% if user.is_authenticated %}
+        <div class='navbar'>
+            <div class='nav__inner'>
+                    <p>You are logged in as: {{ user.username }}<p>
+                    <a href="{% url 'logout' %}">logout</a>
+            </div>
+        </div>
+        <div class='wrapper'>
+            <div class='details'>
+                <p class='selected'>Selected car: {{ selected_make }} {{ selected_model }} {{ selected_year_from }} - {{ selected_year_until }}</p>
+                <p>Total number of active ads: {{total_ad_num }}</p>
+                <p>Average market price: {{ avg_price }} EUR</p>
+                <p>Min price: {{ min_price }} EUR. <a href='{{ min_ad_url }}' target="_blank">Open it on 999.md</a></p>
+                <p>Max price: {{ max_price }} EUR. <a href="{{ max_ad_url }}" target="_blank">Open it on 999.md</a></p>
+                <button onclick="window.location.href = '/'">Go Back</button>
+            </div>
+            <div class='table'>
+                <p>Top 5 {{ selected_make }} {{ selected_model }} ads with best price</p>
+                {{ top_5 | safe }}
+            </div>
+            <div class='popularity'>
+                <a href="/plot/" target="_blank">Show popularity of all {{ selected_make }} models on a bar plot</a>
+            </div>
+        </div>
+        {% else %}
+            <div class='nologin'>
+                <p>You are not logged in and do not have permissions to see this page!</p>
+                <a href="{% url 'login' %}">login</a>
+            </div>
+        {% endif %}  
+    </body>
+</html>
