@@ -10,3 +10,34 @@ This project uses:
 - Pandas (data analysis framework)
 - Matplotlib/Plotly (data vizualization)
 - SQLite3
+
+```
+python_course_project-master
+├─ auto_price
+│  ├─ auto_price
+│  │  ├─ settings.py
+│  │  ├─ urls.py
+│  ├─ car_crawler
+│  │  ├─ car_crawler
+│  │  │  ├─ items.py
+│  │  │  ├─ pipelines.py
+│  │  │  ├─ settings.py
+│  │  │  ├─ spiders
+│  │  │  │  ├─ car_spider.py
+│  ├─ db.sqlite3
+│  ├─ main
+│  │  ├─ admin.py
+│  │  ├─ forms.py
+│  │  ├─ models.py
+│  │  ├─ serializers.py
+│  │  ├─ templates
+│  │  │  ├─ detail.html
+│  │  │  ├─ index.html
+│  │  │  ├─ login.html
+│  │  │  ├─ no_ads.html
+│  │  │  └─ signup.html
+│  │  ├─ urls.py
+│  │  ├─ views.py
+│  ├─ manage.py
+├─ README.md
+├─ requirements.txt
